@@ -1,0 +1,41 @@
+
+
+<div class="well col-md-8 col-md-offset-2">
+  <h6><%= @attendence.user.name %>/Attendence/<%= @attendence.date %></h6>
+  <hr />
+  <table id="mytable" class="table table-bordred table-striped">
+    <thead>
+      <th><h3 class="center description"><strong>Employee Details</strong></h3></th>
+      <th>               </th>
+    </thead>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td><%= @attendence.user.name %></td>
+        </tr>
+        <tr>
+          <td>Checkin Time</td>
+          <td><%= @attendence.check_in&.strftime("%I:%M %p") %></td>
+        </tr>
+        <tr>
+          <td>Checkout Time</td>
+          <td><%= @attendence.check_out&.strftime("%I:%M %p") %></td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td><%= @attendence.date %></td>
+        </tr>
+        <tr>
+          <td>Total Hours </td>
+          <td><%= hours_in_a_day(@attendence) %></td>
+        </tr>
+        <tr>
+          <td>Reason for being late</td>
+          <td><%= @attendence.reason %></td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="col-md-4 col-md-offset-4 colormatch">
+    [ <%= link_to "Back", user_attendences_path %> ]
+  </div>
+</div>

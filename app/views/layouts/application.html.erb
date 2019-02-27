@@ -23,13 +23,8 @@
   <body>
     <%= render 'layouts/navigation' %>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-9">
-          <%= bootstrap_flash %>
-          <%= yield %>
-        </div>
-      </div><!--/row-->
-      <%= render 'layouts/footer' %>
+      <%= render 'layouts/alerts' %>
+      <%= yield %>
     </div> <!-- /container -->
   </body>
 </html>

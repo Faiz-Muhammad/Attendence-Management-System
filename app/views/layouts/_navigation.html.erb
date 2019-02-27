@@ -1,16 +1,36 @@
-<div class="navbar navbar-default navbar-static-top">
+<div class="navbar navbar-default navbar-bg">
   <div class="container">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Attendencemanagement</a>
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Link1", "/path1"  %></li>
-        <li><%= link_to "Link2", "/path2"  %></li>
-        <li><%= link_to "Link3", "/path3"  %></li>
+    <%= link_to "Attendence Management System", homes_path, class: "navbar-brand" %>
+    <div class="navbar-collapse collapse navbar-left" id="navbarSupportedContent">
+      <ul class="nav navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Your Attendance", user_attendences_path(current_user), class: "nav-link" %></li>
+          <% if current_user.admin %>
+            <li class="nav-item"><%= link_to "Employees", users_path, class: "nav-link" %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="navbar-collapse collapse navbar-right" id="navbarSupportedContent">
+      <ul class="nav navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <%= current_user.name.capitalize %>'s Profile <%= "Admin" if current_user.admin? %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "View your profile", user_path(current_user) %></li>
+              <li><%= link_to "Edit your profile", edit_user_path(current_user) %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
       </ul>
     </div>
   </div>

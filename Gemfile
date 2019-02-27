@@ -5,6 +5,12 @@ ruby '2.6.0'
 gem 'devise'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
+gem 'bootstrap-sass'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+gem 'bootstrap'
+
+
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 
@@ -39,6 +45,9 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'ruby-racer'
 gem 'mini_racer'
+gem "paperclip", "~> 6.0.0"
+gem "chartkick"
+gem 'groupdate'
 
 
 

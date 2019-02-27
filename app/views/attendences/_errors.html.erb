@@ -1,0 +1,21 @@
+<% if @attendence.errors.any? %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            <%= pluralize(@attendence.errors.count, "error") %>
+            prohibited this <%= @attendence.class %> from being saved:
+          </h2>
+          <div class="panel-body">
+            <ul>
+              <% @attendence.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

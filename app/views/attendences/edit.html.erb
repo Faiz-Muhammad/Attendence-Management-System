@@ -1,0 +1,54 @@
+<%= render 'errors' %>
+
+<%= form_for([current_user,@attendence]) do |f| %>
+  <div class="container" style="padding-top: 60px;">
+    <h1 class="page-header">Mark Your Attendence</h1>
+    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+      <form class="form-horizontal" role="form">
+        <% if !current_user.admin %>
+          <%= f.hidden_field :check_in_flag, value: false %>
+          <%= f.hidden_field :user_id, value: current_user.id%>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Check Out</label>
+            <div class="col-lg-8">
+              <%=  f.time_select :check_out, class: "form-control" %>
+            </div>
+          </div>
+        <% else %>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Date</label>
+            <div class="col-lg-8">
+              <%= f.date_select :date , class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Check_In</label>
+            <div class="col-lg-8">
+              <%=  f.time_select :check_in, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">If late then reason</label>
+            <div class="col-lg-8">
+              <%= f.text_area :reason, autofocus: true, autocomplete: 'reason', class: 'form-control' %>
+            </div>
+          </div>
+          <%= f.hidden_field :check_in_flag, value: false %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Check Out</label>
+            <div class="col-lg-8">
+              <%=  f.time_select :check_out, class: "form-control" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="form-group col-lg-3 col-lg-8">
+          <%= f.submit(@attendence.new_record? ? "Check In" : "Check Out", class: 'btn btn-primary btn-xlarge') %>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4 col-md-offset-4 colormatch">
+    [ <%= link_to "Cancel request and return", user_attendences_path %> ]
+  </div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div align="center">
+    <div class="container-fluid well span10" align="center">
+      <h3 align="center"> Company Employees </h3>
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped">
+          <div class="pull-right"><%= link_to "Add new Employee", new_user_path, class: "btn btn-primary btn-xlarge" %></div>
+          <thead>
+            <th> Sr. </th>
+            <th>Employee Name</th>
+            <th align="center">Actions</th>
+          </thead>
+          <% @users.each do |user| %>
+            <tbody>
+              <tr>
+                <td><%= user.id %>
+                <td><%= image_tag user.image.url(:thumb), class: "avatar img-circle img-thumbnail img-profile-size" %>  <%= user.name %></td>
+                <td><%= link_to "Attendance Record", user_attendences_path(user) %> |
+                    <%= link_to "Edit", edit_user_path(user) %> |
+                    <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: "Are you sure you want to delete this employee and all associated attendance?"} %> |
+                    <%= link_to "Show", user_path(user) %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
