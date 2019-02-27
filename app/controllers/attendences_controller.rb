@@ -1,9 +1,9 @@
 class AttendencesController < ApplicationController
 
-  before_action :set_attendence, only: [:show, :edit, :update, :destroy]
-  before_action :require_same_user_and_attendence, only: [:edit, :update]
+  # before_action :set_attendence, only: [:show, :edit, :update, :destroy]
+  # before_action :require_same_user_and_attendence, only: [:edit, :update]
   # before_action :require_same_user, only: [:index]
-  before_action :require_admin, only: [:destroy]
+  # before_action :require_admin, only: [:destroy]
 
   def index
     @user = User.find(params[:user_id])
