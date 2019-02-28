@@ -6,15 +6,13 @@
 					<h3><strong>Your Attendence in this Month</strong></h3>
         	<caption><h3><%= Time.now.strftime('%B %Y') %> </h3></caption>
 					<div class="table-responsive">
-						<% if !current_user.admin %>
-							<ul class=" ml-auto pull-right">
-								<% if !current_user.attendences.first.check_in_flag %>
-				          <%= link_to "Check In", new_user_attendence_path(current_user), class: "btn btn-primary btn-xlarge" %>
-				        <% else %>
-			          	<%= link_to "Check Out", edit_user_attendence_path(current_user, current_user.attendences.first.id), class: "btn btn-primary btn-xlarge" %>
-								<% end %>
-				      </ul>
-						<% end %>
+						<ul class=" ml-auto pull-right">
+							<% if !current_user.attendences.first.check_in_flag %>
+			          <%= link_to "Check In", new_user_attendence_path(current_user), class: "btn btn-primary btn-xlarge" %>
+			        <% else %>
+		          	<%= link_to "Check Out", edit_user_attendence_path(current_user, current_user.attendences.first.id), class: "btn btn-primary btn-xlarge" %>
+							<% end %>
+			      </ul>
 	          <table id="mytable" class="table table-bordred table-striped">
 	            <thead>
 	              <th>Name</th>

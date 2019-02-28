@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_074058) do
+ActiveRecord::Schema.define(version: 2019_02_28_142738) do
 
   create_table "attendences", force: :cascade do |t|
     t.date "date"
@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2019_02_27_074058) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "month"
-    t.time "check_in"
-    t.time "check_out"
+    t.datetime "check_in"
+    t.datetime "check_out"
     t.float "hours"
     t.boolean "check_in_flag"
   end
