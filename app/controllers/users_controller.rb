@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy, :edit, :update]
   before_action :require_same_user, only: [:edit, :update]
   before_action :require_admin, only: [:destroy, :index, :new, :create]
-  # before_action :clear_password, only: [:update]
 
   def index
     @users = User.all
@@ -28,17 +27,6 @@ class UsersController < ApplicationController
   end
 
   def update
-  #   if @user.update(user_params)
-  #     sign_in(@user, :bypass => true)
-  #     flash[:notice] = 'Password updated.'
-  #     redirect_to user_path(@user)
-  #   elsif @user.update_user(user_params)
-  #   else
-  #     flash.now[:danger] = 'Password not updated.'
-  #     render 'edit'
-  #   end
-  # en
-
     if user_params[:password].blank? && user_params[:password_confirmation].blank?
       @user.update_without_password(user_params)
       flash[:notice] = "#{@user.name}'s information has been updated."
@@ -74,10 +62,11 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  def clear_password
-     if params[:user][:password_confirmation].blank?
-       params[:user].delete(:password)
-       params[:user].delete(:password_confirmation)
-     end
-   end
+  def require_same_user
+    if current_user != @user && !current_user.admin?
+      flash[:danger] = "You can only edit or view your own information."
+      redirect_to root_path
+    end
+  end
+
 end

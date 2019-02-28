@@ -33,6 +33,7 @@
               <%= f.text_area :reason, autofocus: true, autocomplete: 'reason', class: 'form-control' %>
             </div>
           </div>
+          <%= f.hidden_field :hours, value: hours_in_a_day(@attendence) %>
           <%= f.hidden_field :check_in_flag, value: false %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <div class="form-group">
