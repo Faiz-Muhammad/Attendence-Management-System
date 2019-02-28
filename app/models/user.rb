@@ -8,4 +8,12 @@ class User < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   has_many :attendences
+
+  def update_user
+    if user_params[:password].blank? && user_params[:password_confirmation].blank?
+      @user.update_without_password(user_params)
+    elsif !(user_params[:password].blank? && user_params[:password_confirmation].blank?)
+      @user.update_attributes(user_params)
+    end
+  end
 end

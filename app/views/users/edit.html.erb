@@ -17,56 +17,49 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Name:</label>
             <div class="col-lg-8">
-              <%= f.label :name %>
               <%= f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control' %>
             </div>
           </div>
           <div class="form-group">
-            <label class="col-lg-3 control-label">Last name:</label>
+            <label class="col-lg-3 control-label">Phone Number:</label>
             <div class="col-lg-8">
-              <%= f.label :phonenumber %>
               <%= f.text_field :phonenumber, autofocus: true, autocomplete: 'phonenumber', class: 'form-control' %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Role:</label>
             <div class="col-lg-8">
-              <%= f.label :role %>
               <%= f.text_field :role, autofocus: true, autocomplete: 'role', class: 'form-control' %>
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <%= f.label :email %>
               <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
             </div>
           </div>
-          <div class="form-group">
+           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <%= f.label :password %>
-              <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+              <%= f.password_field :password, class: 'form-control', include_blank: true %>
 
-              <small class="form-text text-muted"><%= t('.leave_blank_if_you_don_t_want_to_change_it') %></small>
+              <small class="form-text text-muted"><%= ('leave_blank_if_you_don_t_want_to_change_it') %></small>
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm Password:</label>
             <div class="col-md-8">
-              <%= f.label :password_confirmation %>
-              <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
+              <%= f.password_field :password_confirmation, class: 'form-control'  %>
             </div>
           </div>
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label class="col-md-3 control-label">Current password:</label>
             <div class="col-md-8">
-              <%= f.label :current_password %>
               <%= f.password_field :current_password, autocomplete: 'current-password', class: 'form-control' %>
 
-              <small class="form-text text-muted"><%= t('.we_need_your_current_password_to_confirm_your_changes') %></small>
+              <small class="form-text text-muted"><%= ('.we_need_your_current_password_to_confirm_your_changes') %></small>
             </div>
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
