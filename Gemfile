@@ -48,6 +48,8 @@ gem 'mini_racer'
 gem "paperclip", "~> 6.0.0"
 gem "chartkick"
 gem 'groupdate'
+gem 'momentjs-rails', '~> 2.9', :github => 'derekprior/momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 
 

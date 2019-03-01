@@ -17,12 +17,17 @@ class AttendencesController < ApplicationController
 
   def create
     @attendence = current_user.attendences.build(attendence_params)
-    if @attendence.save
-      flash[:success] = "Attendence marked successfully!"
-      redirect_to user_attendences_path
-    else
-      render 'new'
-    end
+    # if @attendence.check_in == Date.today
+      if @attendence.save
+        flash[:success] = "Attendence marked successfully!"
+        redirect_to user_attendences_path
+      else
+        render 'new'
+      end
+    # else
+    #   flash[:danger] = "You can only mark today's attendance."
+    #   redirect_to root_path
+    # end
   end
 
   def edit

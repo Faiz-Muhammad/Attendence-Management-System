@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/derekprior/momentjs-rails.git
+  revision: e2b2dd166b121ded02cdcc54f49fa1f0146c7094
+  specs:
+    momentjs-rails (2.20.1)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,6 +67,8 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
+    bootstrap3-datetimepicker-rails (4.17.47)
+      momentjs-rails (>= 2.8.1)
     builder (3.2.3)
     byebug (11.0.0)
     capybara (3.13.2)
@@ -271,6 +280,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap
   bootstrap-sass
+  bootstrap3-datetimepicker-rails (~> 4.17.47)
   byebug
   capybara (>= 2.15)
   chartkick
@@ -283,6 +293,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   listen (>= 3.0.5, < 3.2)
   mini_racer
+  momentjs-rails (~> 2.9)!
   paperclip (~> 6.0.0)
   pg
   puma (~> 3.11)

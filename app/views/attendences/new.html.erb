@@ -7,14 +7,21 @@
       <form class="form-horizontal" role="form">
         <div class="form-group">
           <label class="col-lg-3 control-label">Date</label>
-          <div class="col-lg-8">
-            <%= f.date_select :date , class: "form-control" %>
-          </div>
+            <!-- <%= f.date_select :date , class: "form-control" %> -->
+            <div class="col-lg-4 input-group date datepicker">
+              <%= f.text_field :date, class: "form-control" %>
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Check_In</label>
-          <div class="col-lg-8">
-            <%=  f.time_select :check_in, class: "form-control" %>
+          <div class="col-lg-4 input-group date timepicker">
+            <%= f.text_field :check_in, class: "form-control" %>
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
           </div>
         </div>
         <div class="form-group">
@@ -24,7 +31,7 @@
           </div>
         </div>
         <%= f.hidden_field :check_in_flag, value: true %>
-        <div class="form-group col-lg-3 col-lg-8">
+        <div class="form-group col-lg-3 col-lg-8 ">
           <%= f.submit(@attendence.new_record? ? "Check In" : "Check Out", class: 'btn btn-primary btn-xlarge') %>
         </div>
       </form>

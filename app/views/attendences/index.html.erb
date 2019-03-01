@@ -32,7 +32,7 @@
 	                  <td><%= attendence&.check_out&.strftime("%I:%M %p") %></td>
 	                  <td><%= attendence.created_at.strftime("%Y-%m-%d %I:%M %p") %></td>
 	                  <td><%= hours_in_a_day(attendence) %></td>
-										<% if user_signed_in? && attendence.user.admin %>
+										<% if user_signed_in? && current_user.admin %>
 	                  	<td><%= link_to "", edit_user_attendence_path(current_user, attendence), class:"btn btn-primary btn-xs glyphicon glyphicon-pencil" %>
 												  <%= link_to "", user_attendence_path(current_user,attendence), method: :delete, class:"btn btn-danger btn-xs glyphicon glyphicon-trash", data: {confirm: "Are you sure you want to delete this record?"} %>
 											    <%= link_to "Show", user_attendence_path(current_user,attendence) %></td>
