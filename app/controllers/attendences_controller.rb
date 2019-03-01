@@ -5,6 +5,7 @@ class AttendencesController < ApplicationController
   before_action :require_same_user_for_not_showing_others_attendence, only: [:index]
   before_action :require_admin, only: [:destroy]
   after_action  :set_hours_and_month, only: [:update]
+  # before_action :checking_check_in_date, only: [:create]
 
   def index
     @user = User.find(params[:user_id])
@@ -17,17 +18,17 @@ class AttendencesController < ApplicationController
 
   def create
     @attendence = current_user.attendences.build(attendence_params)
-    # if @attendence.check_in == Date.today
+    if @attendence.date == Date.today
       if @attendence.save
         flash[:success] = "Attendence marked successfully!"
         redirect_to user_attendences_path
       else
         render 'new'
       end
-    # else
-    #   flash[:danger] = "You can only mark today's attendance."
-    #   redirect_to root_path
-    # end
+    else
+      flash[:danger] = "You can only mark today's attendance."
+      redirect_to root_path
+    end
   end
 
   def edit
@@ -35,6 +36,7 @@ class AttendencesController < ApplicationController
   end
 
   def update
+
     if @attendence.update(attendence_params)
       flash[:success] = "Your check out was marked successfully"
       redirect_to user_attendence_path(current_user,@attendence)

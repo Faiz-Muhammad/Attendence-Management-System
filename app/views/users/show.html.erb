@@ -2,7 +2,11 @@
   <div align="center">
     <div class="row-fluid">
       <div class="span2" >
-        <%= image_tag @user.image.url(:medium), class:"avatar img-circle img-thumbnail" %>
+        <% if !current_user.admin? %>
+          <%= image_tag @user.image.url(:medium), class:"avatar img-circle img-thumbnail" %>
+        <% else %>
+          <%= image_tag current_user.image.url(:medium), class:"avatar img-circle img-thumbnail" %>
+        <% end %>
       </div>
       <div class="span8">
         <h3>Name: <%= @user.name %></h3>
