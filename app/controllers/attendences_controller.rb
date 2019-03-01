@@ -5,7 +5,6 @@ class AttendencesController < ApplicationController
   before_action :require_same_user_for_not_showing_others_attendence, only: [:index]
   before_action :require_admin, only: [:destroy]
   after_action  :set_hours_and_month, only: [:update]
-  # before_action :checking_check_in_date, only: [:create]
 
   def index
     @user = User.find(params[:user_id])
@@ -76,7 +75,7 @@ class AttendencesController < ApplicationController
   end
 
   def require_same_user_for_attendence
-    if (current_user.attendences.first.id != @attendence.id)
+    if ((current_user.attendences.first.id != @attendence.id) && (!current_user.admin?))
       flash[:danger] = "Only admin user can perform this action."
       redirect_to root_path
     end
