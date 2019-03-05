@@ -20,4 +20,9 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require custom.js
+//= require fusioncharts/fusioncharts
+//= require fusioncharts/fusioncharts.charts
+//= require fusioncharts/themes/fusioncharts.theme.fint
+//= require moment-timezone
+//= require timezones.full
 //= require_tree .

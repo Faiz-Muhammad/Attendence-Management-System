@@ -1,7 +1,16 @@
+
+
 $( document ).on('turbolinks:load', (function () {
+    // moment.tz("Asia/Karachi");
+    // vaa = moment.tz(new Date(), "Asia/Karachi" );
     $('.timepicker').datetimepicker({
-        format: 'LT',
-        //pickDate: false
+        // useCurrent: false,
+        // language: 'en',
+        format: 'LT'
+        // defaultDate: vaa,
+        // sideBySide: true,
+        // inline: true
+      //  //pickDate: false
     });
 }));
 

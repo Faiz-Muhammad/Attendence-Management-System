@@ -50,6 +50,8 @@ gem "chartkick"
 gem 'groupdate'
 gem 'momentjs-rails', '~> 2.9', :github => 'derekprior/momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'fusioncharts-rails'
+gem 'moment_timezone-rails'
 
 
 
@@ -58,6 +60,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3','~> 1.3.6'
+  gem 'rspec-rails', '~> 3.6.0'
 end
 
 group :production do
