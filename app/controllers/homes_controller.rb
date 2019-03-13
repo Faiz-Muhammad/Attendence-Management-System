@@ -6,10 +6,11 @@ class HomesController < ApplicationController
 
     att.each do |obj|
       attendences_of_a_user.push({
-        label: obj.date.strftime("%d %b %Y"),
+        label: obj.date.strftime("%d %b"),
         value: obj.hours
         })
     end
+
 
     @chart = Fusioncharts::Chart.new({
       height: "400",
@@ -24,7 +25,7 @@ class HomesController < ApplicationController
               # subCaption: "Checked-In Hours",
               yAxisName: "Hours",
               anchorradius: "5",
-              plottooltext: "Total working hours at <b>$label</b> are <b>$dataValue</b>",
+              plottooltext: "<h5>Total working hours <b>$dataValue</b></h5>",
               showhovereffect: "1",
               theme: "fint",
               anchorbgcolor: "#72D7B2",

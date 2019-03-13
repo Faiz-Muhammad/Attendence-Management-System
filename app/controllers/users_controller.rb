@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:show, :destroy, :edit, :update]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update, :show]
   before_action :require_admin, only: [:destroy, :index, :new, :create]
 
   def index
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   def destroy
     if !@user.admin?
       @user.destroy
-      flash[:danger] = "Employee and all associated records have been deleted"
+      flash[:notice] = "Employee and all associated records have been deleted"
       redirect_to users_path
     end
   end

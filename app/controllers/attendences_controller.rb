@@ -1,13 +1,12 @@
 class AttendencesController < ApplicationController
 
-  before_action :set_attendence, only: [:show, :edit, :update, :destroy]
-  before_action :require_same_user_for_attendence, only: [:edit, :update]
-  before_action :require_same_user_for_not_showing_others_attendence, only: [:index]
+  before_action :set_attendence, except: [:new]
+  before_action :require_same_user_for_attendence, except: [:destroy, :show ]
+  before_action :require_same_user_attendence_for_show, only: [:show]
   before_action :require_admin, only: [:destroy]
   after_action  :set_hours_and_month, only: [:update]
 
   def index
-    @user = User.find(params[:user_id])
     @attendences = @user.attendences.all
   end
 
@@ -16,7 +15,7 @@ class AttendencesController < ApplicationController
   end
 
   def create
-    @attendence = current_user.attendences.build(attendence_params)
+    @attendence = @user.attendences.build(attendence_params)
     if @attendence.date == Date.today && !current_user.admin?
       if @attendence.save
         flash[:success] = "Attendence marked successfully!"
@@ -42,7 +41,6 @@ class AttendencesController < ApplicationController
   end
 
   def update
-
     if @attendence.update(attendence_params)
       flash[:success] = "Your check out was marked successfully"
       redirect_to user_attendence_path(current_user,@attendence)
@@ -66,6 +64,7 @@ class AttendencesController < ApplicationController
   end
 
   def set_attendence
+    @user = User.find(params[:user_id])
     @attendence = Attendence.find_by(id: params[:id])
   end
 
@@ -74,15 +73,15 @@ class AttendencesController < ApplicationController
     current_user.attendences.first.update_attribute(:month, Time.now.strftime("%B"))
   end
 
-  def require_same_user_for_not_showing_others_attendence
-    if current_user.id != params[:user_id].to_i && !current_user.admin?
-      flash[:danger] = "You can only edit or view your own information."
+  def require_same_user_attendence_for_show
+    if ((current_user.id != @attendence.user_id) && (!current_user.admin?))
+      flash[:danger] = "You can only view your own attendence data."
       redirect_to root_path
     end
   end
 
   def require_same_user_for_attendence
-    if ((current_user.attendences.first.id != @attendence.id) && (!current_user.admin?))
+    if ((current_user.id != params[:user_id].to_i) && (!current_user.admin?))
       flash[:danger] = "Only admin user can perform this action."
       redirect_to root_path
     end

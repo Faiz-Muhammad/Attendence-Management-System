@@ -1,13 +1,13 @@
 <%= render 'errors' %>
 
-<%= form_for([current_user,@attendence]) do |f| %>
+<%= form_for([@user,@attendence]) do |f| %>
   <div class="container" style="padding-top: 60px;">
     <h1 class="page-header">Mark Your Attendence</h1>
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <form class="form-horizontal" role="form">
         <% if !current_user.admin %>
           <%= f.hidden_field :check_in_flag, value: false %>
-          <%= f.hidden_field :user_id, value: current_user.id%>
+          <%= f.hidden_field :user_id, value: @user.id%>
           <div class="form-group">
             <label class="col-lg-3 control-label">Check Out</label>
             <div class="col-lg-4 input-group date timepicker">
@@ -44,7 +44,7 @@
           </div>
           <%= f.hidden_field :hours, value: hours_in_a_day(@attendence) %>
           <%= f.hidden_field :check_in_flag, value: false %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :user_id, value: @user.id %>
 
         <% end %>
         <div class="form-group col-lg-3 col-lg-8">

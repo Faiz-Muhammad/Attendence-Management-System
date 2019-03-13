@@ -7,10 +7,10 @@
         	<caption><h3><%= Time.now.strftime('%B %Y') %> </h3></caption>
 					<div class="table-responsive">
 						<ul class=" ml-auto pull-right">
-							<% if !current_user.attendences.first.check_in_flag %>
-			          <%= link_to "Check In", new_user_attendence_path(current_user), class: "btn btn-primary btn-xlarge" %>
+							<% if !@user.attendences.first.check_in_flag %>
+			          <%= link_to "Check In", new_user_attendence_path(@user), class: "btn btn-primary btn-xlarge" %>
 			        <% else %>
-		          	<%= link_to "Check Out", edit_user_attendence_path(current_user, current_user.attendences.first.id), class: "btn btn-primary btn-xlarge" %>
+		          	<%= link_to "Check Out", edit_user_attendence_path(@user, @user.attendences.first.id), class: "btn btn-primary btn-xlarge" %>
 							<% end %>
 			      </ul>
 	          <table id="mytable" class="table table-bordred table-striped">
@@ -32,12 +32,12 @@
 	                  <td><%= attendence&.check_out&.strftime("%I:%M %p") %></td>
 	                  <td><%= attendence.created_at.strftime("%Y-%m-%d %I:%M %p") %></td>
 	                  <td><%= hours_in_a_day(attendence) %></td>
-										<% if user_signed_in? && current_user.admin %>
-	                  	<td><%= link_to "", edit_user_attendence_path(current_user, attendence), class:"btn btn-primary btn-xs glyphicon glyphicon-pencil" %>
-												  <%= link_to "", user_attendence_path(current_user,attendence), method: :delete, class:"btn btn-danger btn-xs glyphicon glyphicon-trash", data: {confirm: "Are you sure you want to delete this record?"} %>
-											    <%= link_to "Show", user_attendence_path(current_user,attendence) %></td>
+										<% if user_signed_in? && current_user.admin? %>
+	                  	<td><%= link_to "", edit_user_attendence_path(@user, attendence), class:"btn btn-primary btn-xs glyphicon glyphicon-pencil" %>
+												  <%= link_to "", user_attendence_path(@user,attendence), method: :delete, class:"btn btn-danger btn-xs glyphicon glyphicon-trash", data: {confirm: "Are you sure you want to delete this record?"} %>
+											    <%= link_to "Show", user_attendence_path(@user,attendence) %></td>
 										<% else %>
-											<td><%= link_to "Show", user_attendence_path(current_user,attendence) %></td>
+											<td><%= link_to "Show", user_attendence_path(@user,attendence) %></td>
 										<% end %>
 									</tr>
 	              </tbody>
@@ -50,7 +50,7 @@
 				<% else %>
 					<h3><strong>Employee has currently no attendance record.</strong></h3>
 					<ul class="ml-auto pull-right">
-						<%= link_to "Check In", new_user_attendence_path(current_user), class: "btn btn-primary btn-xlarge" %>
+						<%= link_to "Check In", new_user_attendence_path(@user), class: "btn btn-primary btn-xlarge" %>
 					</ul>
 				<% end %>
       </div>
