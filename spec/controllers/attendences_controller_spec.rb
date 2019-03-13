@@ -189,22 +189,22 @@ RSpec.describe AttendencesController, type: :controller do
 
 # <---------------------------SHOW ACTION TESTS--------------------------->
 
-  describe "#show" do
-    before(:each) do
-      @user_1 = FactoryBot.create(:user, admin: true)
-      @user_2 = FactoryBot.create(:user)
-      @user_3 = FactoryBot.create(:user)
-      @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
-      @attendence_2 = FactoryBot.create(:attendence, user: @user_3)
-    end
-
-    context "as an authorized user (attendence show)" do
-      it "responds successfully, when admin" do
-        sign_in @user_1
-        get :show, params: {id: @attendence_1.id}
-        expect(response).to be_successful
-      end
-    end
-  end
+  # describe "#show" do
+  #   before(:each) do
+  #     @user_1 = FactoryBot.create(:user, admin: true)
+  #     @user_2 = FactoryBot.create(:user)
+  #     @user_3 = FactoryBot.create(:user)
+  #     @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
+  #     @attendence_2 = FactoryBot.create(:attendence, user: @user_3)
+  #   end
+  #
+  #   context "as an authorized user (attendence show)" do
+  #     it "responds successfully, when admin" do
+  #       sign_in @user_1
+  #       get :show, params: {id: @attendence_1.id}
+  #       expect(response).to be_successful
+  #     end
+  #   end
+  # end
 
 end
