@@ -60,7 +60,7 @@ class AttendencesController < ApplicationController
 
   private
   def attendence_params
-    params.require(:attendence).permit(:date, :reason, :check_in, :check_out, :month, :check_in_flag, :hours, :month, :user_id)
+    params.require(:attendence).permit(:date, :reason, :check_in, :check_out, :month, :check_in_flag, :hours, :user_id)
   end
 
   def set_attendence
@@ -69,8 +69,8 @@ class AttendencesController < ApplicationController
   end
 
   def set_hours_and_month
-    current_user.attendences.first.update_attribute(:hours, hours_in_a_day(current_user.attendences.first))
-    current_user.attendences.first.update_attribute(:month, Time.now.strftime("%B"))
+    @user.attendences.first.update_attribute(:hours, hours_in_a_day(@user.attendences.first))
+    @user.attendences.first.update_attribute(:month, Time.now.strftime("%B"))
   end
 
   def require_same_user_attendence_for_show

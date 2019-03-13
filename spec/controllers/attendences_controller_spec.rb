@@ -148,63 +148,131 @@ RSpec.describe AttendencesController, type: :controller do
 
 # <---------------------------EDIT ACTION TESTS--------------------------->
 
-  # describe "#edit" do
-  #   before(:each) do
-  #     @user_1 = FactoryBot.create(:user, admin: true)
-  #     @user_2 = FactoryBot.create(:user)
-  #     @user_3 = FactoryBot.create(:user)
-  #     @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
-  #   end
-  #
-  #   context "as an authorized user(attendence edit)" do
-  #
-  #     it "responds successfully, when admin" do
-  #       sign_in @user_1
-  #       get :edit, params: {user: @user_2, attendence: @attendence_1}
-  #       expect(response).to be_successful
-  #     end
-  #
-  #     it "responds successfully, when not admin but same user" do
-  #       sign_in @user_2
-  #       get :edit, params: {user: @user_2, attendence: @attendence_1}
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  #
-  #   context "as an unauthorized user(attendence edit)" do
-  #
-  #     it "doesn't responds, when not admin and not same user" do
-  #       sign_in @user_3
-  #       get :edit, params: {user: @user_2, attendence: @attendence_1}
-  #       expect(response).not_to be_successful
-  #     end
-  #
-  #     it "redirects to home page" do
-  #       sign_in @user_3
-  #       get :edit, params: {user: @user_2, attendence: @attendence_1}
-  #       expect(response).to redirect_to root_path
-  #     end
-  #   end
-  # end
+  describe "#edit" do
+    before(:each) do
+      @user_1 = FactoryBot.create(:user, admin: true)
+      @user_2 = FactoryBot.create(:user)
+      @user_3 = FactoryBot.create(:user)
+      @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
+    end
+
+    context "as an authorized user(attendence edit)" do
+
+      it "responds successfully, when admin" do
+        sign_in @user_1
+        get :edit, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).to be_successful
+      end
+
+      it "responds successfully, when not admin but same user" do
+        sign_in @user_2
+        get :edit, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).to be_successful
+      end
+    end
+
+    context "as an unauthorized user(attendence edit)" do
+
+      it "doesn't responds, when not admin and not same user" do
+        sign_in @user_3
+        get :edit, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).not_to be_successful
+      end
+
+      it "redirects to home page" do
+        sign_in @user_3
+        get :edit, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+# <---------------------------UPDATE ACTION TESTS--------------------------->
+
+  describe "#update" do
+    before(:each) do
+      @user_1 = FactoryBot.create(:user, admin: true)
+      @user_2 = FactoryBot.create(:user)
+      @user_3 = FactoryBot.create(:user)
+      @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
+      @attendence_2 = FactoryBot.create(:attendence, user: @user_3)
+    end
+
+    context "as an authorized user(attendence update)" do
+
+      it "responds successfully, when admin" do
+        attendence_params = FactoryBot.attributes_for(:attendence)
+        sign_in @user_1
+        patch :update, params: {id: @attendence_2.id, user_id: @user_3.id, attendence: attendence_params}
+        expect(response).not_to be_successful
+      end
+
+      it "updates attendence, when not admin but same user" do
+        attendence_params = FactoryBot.attributes_for(:attendence, month: "September")
+        sign_in @user_2
+        patch :update, params: {id: @attendence_1.id, user_id: @user_2.id, attendence: attendence_params}
+        expect(@user_2.attendences.first.month).not_to eq "September"
+      end
+    end
+
+    context "as an unauthorized user(attendence update)" do
+
+      it "doesn't responds, when not admin and not same user" do
+        attendence_params = FactoryBot.attributes_for(:attendence)
+        sign_in @user_3
+        patch :update, params: {id: @attendence_1.id, user_id: @user_2.id, attendence: attendence_params}
+        expect(response).not_to be_successful
+      end
+
+      it "redirects to home page" do
+        attendence_params = FactoryBot.attributes_for(:attendence)
+        sign_in @user_3
+        put :update, params: {id: @attendence_1.id, user_id: @user_2.id, attendence: attendence_params}
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 
 # <---------------------------SHOW ACTION TESTS--------------------------->
 
-  # describe "#show" do
-  #   before(:each) do
-  #     @user_1 = FactoryBot.create(:user, admin: true)
-  #     @user_2 = FactoryBot.create(:user)
-  #     @user_3 = FactoryBot.create(:user)
-  #     @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
-  #     @attendence_2 = FactoryBot.create(:attendence, user: @user_3)
-  #   end
-  #
-  #   context "as an authorized user (attendence show)" do
-  #     it "responds successfully, when admin" do
-  #       sign_in @user_1
-  #       get :show, params: {id: @attendence_1.id}
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  # end
+  describe "#show" do
+    before(:each) do
+      @user_1 = FactoryBot.create(:user, admin: true)
+      @user_2 = FactoryBot.create(:user)
+      @user_3 = FactoryBot.create(:user)
+      @attendence_1 = FactoryBot.create(:attendence, user: @user_2)
+    end
+
+    context "as an authorized user (attendence show)" do
+
+      it "responds successfully, when admin" do
+        attendence_params = FactoryBot.attributes_for(:attendence)
+        sign_in @user_1
+        get :show, params: {id: @attendence_1.id, user_id: @user_2.id}
+        expect(response).to be_successful
+      end
+
+      it "responds successfully, when not admin but same user" do
+        sign_in @user_2
+        get :show, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).to be_successful
+      end
+    end
+
+    context "as an unauthorized user(attendence show)" do
+
+      it "doesn't responds, when not admin and not same user" do
+        sign_in @user_3
+        get :show, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).not_to be_successful
+      end
+
+      it "redirects to home page" do
+        sign_in @user_3
+        get :show, params: {user_id: @user_2.id, id: @attendence_1.id}
+        expect(response).to redirect_to root_path
+      end
+    end
+  end
 
 end

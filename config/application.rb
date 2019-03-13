@@ -24,7 +24,7 @@ module Attendencemanagement
       routing_specs: false
     end
 
-    config.factory_bot.definition_file_paths = ["spec/factories"]
+    # config.factory_bot.definition_file_paths = ["spec/factories"]
 
 
   end
